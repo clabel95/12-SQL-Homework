@@ -1,5 +1,7 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const inquirer = require('inquirer');
+const cTable = require('console.table');
+
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -47,7 +49,7 @@ const ViewAllDepartments = () => {
     const query = 'Select * FROM department';
     connection.query(query, function(err, res){
         if (err) throw err; 
-        console.log(res);   
+        console.table("All Departments",res);   
     });
     User_input();
 };
@@ -56,16 +58,16 @@ const ViewAllRoles = () => {
     const query = 'Select * FROM role';
     connection.query(query, function(err, res){
         if (err) throw err; 
-        console.log(res);   
+        console.table("All Roles",res);   
     });
     User_input();
 }; 
 
 const ViewAllEmplyees = () => {
     const query = 'Select * FROM employee';
-    connection.query(query, function(err, res){
+    connection.query(query, function(err, data){
         if (err) throw err; 
-        console.log(res);   
+        console.table("All Employees",data);   
     });
     User_input();
 };
